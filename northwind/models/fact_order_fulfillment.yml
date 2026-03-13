@@ -2,32 +2,50 @@ version: 2
 
 models:
   - name: fact_order_fulfillment
-    description: Order level fact table. Transaction one row per order does not include product but can track order fulfillment
+    description: Order level fact table. Transaction grain with one row per order. Does not include product detail but tracks order fulfillment metrics.
     columns:
-      - name: OrderId
-        description: Degenerate dimension for of the order.
+      - name: orderid
+        description: Degenerate dimension key of the order
         tests:
-            - unique
-            - not_null
+          - unique
+          - not_null
       - name: customerkey
         description: Dimension key for dim_customer
       - name: employeekey
         description: Dimension key for dim_employee
       - name: orderdatekey
-        description: role play Order Date Dimension key for dim_date
+        description: Role-play Order Date dimension key for dim_date
       - name: requireddatekey
-        description: role play Required Date Dimension key for dim_date
+        description: Role-play Required Date dimension key for dim_date
       - name: shippeddatekey
-        description: role play Shipped Date  Dimension key for dim_date
-      - name: quantity
-        description: additive fact for total quantity of product sold on order
+        description: Role-play Shipped Date dimension key for dim_date
+      - name: shipname
+        description: Name of the person or company the order was shipped to
+      - name: shipaddress
+        description: Street address the order was shipped to
+      - name: shipcity
+        description: City the order was shipped to
+      - name: shipregion
+        description: Region or state the order was shipped to
+      - name: shippostalcode
+        description: Postal code the order was shipped to
+      - name: shipcountry
+        description: Country the order was shipped to
+      - name: freight
+        description: Freight cost charged for the order
+      - name: shipvia
+        description: Foreign key to the shipper used for the order
+      - name: shippercompanyname
+        description: Name of the shipping company used to fulfill the order
+      - name: quantityonorder
+        description: Additive fact for total quantity of product sold on the order
       - name: totalorderamount
-        description: additive fact for total amount of product on order quantity * product price - discount
+        description: Additive fact for total order value calculated as quantity times unit price minus discount
       - name: daysfromordertoshipped
-        description: the number of days elapsed from order to shipped
+        description: The number of days elapsed from order date to shipped date
       - name: daysfromordertorequired
-        description: the number of days before the order is required 
+        description: The number of days from order date to the required delivery date
       - name: shippedtorequireddelta
-        description: the difference between  shipped and required. positive means shipment was late.
+        description: The difference in days between shipped date and required date. Positive means shipment was late.
       - name: shippedontime
-        description: yes or no was the shipment on time
+        description: Y if the order shipped on or before the required date, N if late

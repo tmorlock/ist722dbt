@@ -16,3 +16,15 @@ models:
         tests:
           - not_null
           - unique
+
+      - name: productname
+        description: The name of the product
+
+      - name: supplierkey
+        description: Surrogate key for the supplier, derived from supplierid. Foreign key to dim_supplier.
+
+      - name: categoryname
+        description: The name of the category the product belongs to
+
+      - name: categorydescription
+        description: A text description of the product category
