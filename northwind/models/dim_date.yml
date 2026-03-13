@@ -4,8 +4,8 @@ models:
   - name: dim_date
     description: Conformed Date Dimension. One row per day of the year.
     columns:
-      - name: datekey 
-        data_type: int 
+      - name: datekey
+        data_type: int
         description: The surrogate key of the date YYYYMMDD
         tests:
           - not_null
@@ -15,3 +15,25 @@ models:
         tests:
           - not_null
           - unique
+      - name: year
+        description: The calendar year of the date
+      - name: month
+        description: The calendar month number (1-12)
+      - name: quarter
+        description: The calendar quarter number (1-4)
+      - name: day
+        description: The day of the month (1-31)
+      - name: dayofweek
+        description: The day of the week as a number (1=Monday)
+      - name: weekofyear
+        description: The ISO week number of the year (1-53)
+      - name: dayofyear
+        description: The day number within the year (1-366)
+      - name: quartername
+        description: The quarter label, e.g. Q1, Q2, Q3, Q4
+      - name: monthname
+        description: The abbreviated month name, e.g. Jan, Feb
+      - name: dayname
+        description: The abbreviated day name, e.g. Mon, Tue
+      - name: weekday
+        description: Y if the date is a weekday (Mon-Fri), N if weekend
